@@ -231,6 +231,11 @@ int main()
   }
 
   // test
+  // sum_base: 127896.000000 0.066404s
+  // sum_sse: 127896.000000  0.024867s
+  // sum_sse_unroll_4: 127896.000000  0.013439s
+  // sum_avx: 127896.000000 0.015330s
+  // sum_avx_unroll_4: 127896.000000  0.007763s
   run_test("sum_base", sum_base);
   run_test("sum_sse", sum_sse);
   run_test("sum_sse_unroll_4", sum_sse_unroll_4);
