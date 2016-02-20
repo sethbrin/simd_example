@@ -1,3 +1,4 @@
+CFLAGS = -msse -mavx
 
 TARGETS = \
 _mm_load_ps.out \
@@ -13,12 +14,13 @@ _mm_set_ps1.out \
 _mm_set1_ps.out \
 _mm_set_ss.out \
 _mm_setr_ps.out \
-_mm_setzero_ps.out
+_mm_setzero_ps.out \
+test_sse_avx_add.out
 
 all: $(TARGETS)
 
-%.out: %.cc
-	$(CC) $< -o $@
+%.out: %.c
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
 	rm $(TARGETS)
