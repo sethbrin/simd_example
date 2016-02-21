@@ -15,7 +15,8 @@ _mm_set1_ps.out \
 _mm_set_ss.out \
 _mm_setr_ps.out \
 _mm_setzero_ps.out \
-test_sse_avx_add.out
+test_sse_avx_add_float.out \
+test_sse_avx_add_double.out
 
 all: $(TARGETS)
 

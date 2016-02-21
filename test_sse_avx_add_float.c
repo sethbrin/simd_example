@@ -24,7 +24,6 @@ float sum_base(const float* nums, int cnt)
   float res = 0;
   int ind = 0;
 
-#pragma simd
   for (ind=0; ind<cnt; ind++)
   {
     res += nums[ind];
