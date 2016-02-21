@@ -1,4 +1,4 @@
-CFLAGS = -msse -mavx
+CFLAGS = -msse -mavx -mavx2
 
 TARGETS = \
 _mm_load_ps.out \
@@ -16,7 +16,8 @@ _mm_set_ss.out \
 _mm_setr_ps.out \
 _mm_setzero_ps.out \
 test_sse_avx_add_float.out \
-test_sse_avx_add_double.out
+test_sse_avx_add_double.out \
+test_mmx_sse_avx_add_int.out
 
 all: $(TARGETS)
 

@@ -198,8 +198,8 @@ void run_test(const char* proc_name, TESTPROC proc)
   double res;
   int ind_outer;
 
-  double time = 0.0f;
-  double tmp = 0.0f;
+  float time = 0.0f;
+  float tmp = 0.0f;
 
   int test_cnt = 3;
   for (ind_outer=0; ind_outer<test_cnt; ind_outer++)
