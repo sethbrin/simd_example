@@ -1,5 +1,6 @@
-#include <time.h>
 #include <stdio.h>
+#include <time.h>
+#include<sys/time.h>
 
 // global variable
 struct timeval g_get_time_start_time, g_get_time_end_time;

@@ -17,7 +17,8 @@ _mm_setr_ps.out \
 _mm_setzero_ps.out \
 test_sse_avx_add_float.out \
 test_sse_avx_add_double.out \
-test_mmx_sse_avx_add_int.out
+test_mmx_sse_avx_add_int.out \
+test_likely.out
 
 all: $(TARGETS)
 
