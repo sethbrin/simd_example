@@ -32,6 +32,7 @@ double sum_base(const double* nums, int cnt)
   return res;
 }
 
+#ifdef __SSE__
 double sum_sse(const double* nums, int cnt)
 {
   int block_size = 2; // as the sse is 128 bit, 128 = 2 * 64
@@ -45,6 +46,7 @@ double sum_sse(const double* nums, int cnt)
 
   int ind = 0;
   const double* p = nums;
+  const double* q;
 
   for (ind=0; ind<block_cnt; ind++)
   {
@@ -54,7 +56,8 @@ double sum_sse(const double* nums, int cnt)
     p += block_size;
   }
 
-  res = res_m128[0] + res_m128[1];
+  q = (const double*)&res_m128;
+  res = q[0] + q[1];
 
   for (ind=0; ind<block_remain; ind++)
   {
@@ -83,6 +86,7 @@ double sum_sse_unroll_4(const double* nums, int cnt)
 
   int ind = 0;
   const double* p = nums;
+  const double* q;
 
   for (ind=0; ind<block_cnt; ind++)
   {
@@ -101,7 +105,9 @@ double sum_sse_unroll_4(const double* nums, int cnt)
   res_m128 = _mm_add_pd(res_m128, res1_m128);
   res_m128 = _mm_add_pd(res_m128, res2_m128);
   res_m128 = _mm_add_pd(res_m128, res3_m128);
-  res = res_m128[0] + res_m128[1];
+
+  q = (const double*)&res_m128;
+  res = q[0] + q[1];
 
   for (ind=0; ind<block_remain; ind++)
   {
@@ -110,8 +116,9 @@ double sum_sse_unroll_4(const double* nums, int cnt)
 
   return res;
 }
+#endif
 
-
+#ifdef __AVX__
 double sum_avx(const double* nums, int cnt)
 {
   int block_size = 4; // as the avx is 256 bit, 256 = 4 * 64
@@ -125,6 +132,7 @@ double sum_avx(const double* nums, int cnt)
 
   int ind = 0;
   const double* p = nums;
+  const double* q;
 
   for (ind=0; ind<block_cnt; ind++)
   {
@@ -134,7 +142,8 @@ double sum_avx(const double* nums, int cnt)
     p += block_size;
   }
 
-  res = res_m256[0] + res_m256[1] + res_m256[2] + res_m256[3];
+  q = (const double*)&res_m256;
+  res = q[0] + q[1] + q[2] + q[3];
 
   for (ind=0; ind<block_remain; ind++)
   {
@@ -163,6 +172,7 @@ double sum_avx_unroll_4(const double* nums, int cnt)
 
   int ind = 0;
   const double* p = nums;
+  const double* q;
 
   for (ind=0; ind<block_cnt; ind++)
   {
@@ -182,7 +192,8 @@ double sum_avx_unroll_4(const double* nums, int cnt)
   res_m256 = _mm256_add_pd(res_m256, res2_m256);
   res_m256 = _mm256_add_pd(res_m256, res3_m256);
 
-  res = res_m256[0] + res_m256[1] + res_m256[2] + res_m256[3];
+  q = (const double*)&res_m256;
+  res = q[0] + q[1] + q[2] + q[3];
 
   for (ind=0; ind<block_remain; ind++)
   {
@@ -191,6 +202,7 @@ double sum_avx_unroll_4(const double* nums, int cnt)
 
   return res;
 }
+#endif
 
 void run_test(const char* proc_name, TESTPROC proc)
 {
@@ -234,9 +246,15 @@ int main()
   // sum_avx: 64505.000000 0.015302s
   // sum_avx_unroll_4: 64505.000000  0.007587s
   run_test("sum_base", sum_base);
+
+#ifdef __SSE__
   run_test("sum_sse", sum_sse);
   run_test("sum_sse_unroll_4", sum_sse_unroll_4);
+#endif
+
+#ifdef __AVX__
   run_test("sum_avx", sum_avx);
   run_test("sum_avx_unroll_4", sum_avx_unroll_4);
+#endif
   return 0;
 }

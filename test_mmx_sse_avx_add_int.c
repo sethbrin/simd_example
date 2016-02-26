@@ -32,6 +32,7 @@ int sum_base(const int* nums, int cnt)
   return res;
 }
 
+#ifdef __MMX__
 int sum_mmx(const int* nums, int cnt)
 {
   int block_size = 2; // as the sse is 64 bit, 64 = 2 * 32
@@ -118,7 +119,9 @@ int sum_mmx_unroll_4(const int* nums, int cnt)
 
   return res;
 }
+#endif
 
+#ifdef __SSE2__
 int sum_sse(const int* nums, int cnt)
 {
   int block_size = 4; // as the sse is 128 bit, 128 = 4 * 32
@@ -205,8 +208,9 @@ int sum_sse_unroll_4(const int* nums, int cnt)
 
   return res;
 }
+#endif
 
-
+#ifdef __AVX2__
 int sum_avx(const int* nums, int cnt)
 {
   int block_size = 8; // as the avx is 256 bit, 256 = 8 * 32
@@ -294,6 +298,7 @@ int sum_avx_unroll_4(const int* nums, int cnt)
 
   return res;
 }
+#endif
 
 void run_test(const char* proc_name, TESTPROC proc)
 {
@@ -339,11 +344,20 @@ int main()
   // sum_avx: 22535  0.013203s
   // sum_avx_unroll_4: 22535 0.007119s
   run_test("sum_base", sum_base);
+
+#ifdef __MMX__
   run_test("sum_mmx", sum_mmx);
   run_test("sum_mmx_unroll_4", sum_mmx_unroll_4);
+#endif
+
+#ifdef __SSE2__
   run_test("sum_sse", sum_sse);
   run_test("sum_sse_unroll_4", sum_sse_unroll_4);
+#endif
+
+#ifdef __AVX2__
   run_test("sum_avx", sum_avx);
   run_test("sum_avx_unroll_4", sum_avx_unroll_4);
+#endif
   return 0;
 }
