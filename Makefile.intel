@@ -1,0 +1,4 @@
+CC = icc
+CFLAGS = -march=core-avx
+
+include Makefile.common

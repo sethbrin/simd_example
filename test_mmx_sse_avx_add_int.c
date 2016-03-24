@@ -6,6 +6,7 @@
 // Note: `cat /proc/cpuinfo` first to see if you computer support sse or avx
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <immintrin.h>
 
 #include "include/get_time.h"
@@ -56,7 +57,7 @@ int sum_mmx(const int* nums, int cnt)
     p ++;
   }
 
-  q = (const int32_t*)&res_m64;
+  q = (const int*)&res_m64;
   res = q[0] + q[1];
 
   q = (int*)p;
@@ -108,7 +109,7 @@ int sum_mmx_unroll_4(const int* nums, int cnt)
   res_m64 = _mm_add_pi32(res_m64, res3_m64);
 
   // the double and float can use [] to access each number of the m64, but int can not
-  q = (const int32_t*)&res_m64;
+  q = (const int*)&res_m64;
   res = q[0] + q[1];
 
   q = (int*)p;
@@ -145,7 +146,7 @@ int sum_sse(const int* nums, int cnt)
     p ++;
   }
 
-  q = (const int32_t*)&res_m128;
+  q = (const int*)&res_m128;
   res = q[0] + q[1] + q[2] + q[3];
 
   q = (int*)p;
