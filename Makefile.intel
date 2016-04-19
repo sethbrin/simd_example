@@ -1,4 +1,6 @@
 CC = icc
-CFLAGS = -march=core-avx
+CFLAGS = -march=corei7-avx -qopt-report=5 -O2
+
+INTEL=  \
 
 include Makefile.common
