@@ -1,4 +1,4 @@
-CFLAGS = -msse -mavx #-mavx2
+CFLAGS = -msse -mavx -mavx2
 
 TARGETS = \
 _mm_load_ps.out \
@@ -20,6 +20,10 @@ test_sse_avx_add_double.out \
 test_mmx_sse_avx_add_int.out \
 test_likely.out \
 _mm_slli_si128.out \
+_mm256_slli_si256.out \
+_mm256_max.out \
+_mm_mask_add.out \
+_mm_subs_epu8.out \
 
 all: $(TARGETS)
 
