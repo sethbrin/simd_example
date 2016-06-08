@@ -28,6 +28,11 @@ int main()
 
   int res;
   __max_16(res, value1);
+
+  int8_t* p = (int8_t*)&value1;
+  res = 0;
+  for (i=0; i<16; i++)
+    res = res > p[i] ? res : p[i];
   printf("%d\n", res);
 
 	return 0;

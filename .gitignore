@@ -2,5 +2,7 @@
 !*.c
 !*.h
 !Makefile
+!Makefile.common
+!Makefile.intel
 !.gitignore
 !include
