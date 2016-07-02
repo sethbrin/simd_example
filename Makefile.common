@@ -20,7 +20,9 @@ test_mmx_sse_avx_add_int.out \
 test_likely.out \
 test_gather_scatter \
 _mm256_slli_si256.out \
-_mm256_max \
+_mm256_max.out \
+_mm256_alignr_epi.out \
+_mm_cmp.out \
 
 all: $(TARGETS)
 

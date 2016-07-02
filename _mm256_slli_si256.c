@@ -18,9 +18,20 @@ int main()
     printf("%d  ", value[i]);
   }
   printf("\n");
+
+  __m256i tmp = _mm256_permute2x128_si256(value1, value1, _MM_SHUFFLE(0, 0, 2, 0));
+  value = (char*)&tmp;
+  printf("tmp:");
+  for (i=0; i<32; i++)
+  {
+    printf("%d  ", value[i]);
+  }
+  printf("\n");
+
   //value1 = _mm256_slli_si256(value1, 1);
   value1 = _mm256_alignr_epi8(value1, _mm256_permute2x128_si256(value1, value1, _MM_SHUFFLE(0, 0, 2, 0)), 16 - 1);
   //value1 = _mm256_alignr_epi8(value1, zero, 15);
+
   value = (char*)&value1;
   printf("value:");
   for (i=0; i<32; i++)
